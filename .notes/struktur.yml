@@ -1,0 +1,43 @@
+models:
+  users:
+    id:
+      type: int
+      primary: true
+    name:
+      type: string
+    username:
+      type: string
+      unique: true
+    email:
+      type: string
+      unique: true
+    password
+      type: string
+      password: true
+      ... 
+  events:
+    id:
+      type: int
+      primary: true
+    title:
+      type: string
+    description:
+      type: text
+      nullable: true
+    free:
+      type: bool
+      default: true 
+    plans:
+      type: json
+      nullable: true
+    organisator:
+      type: json
+      structure:
+        name, image, second_text
+  tickets:
+    id
+    plan
+    event_id
+    user_id:
+      type: relation
+      relation: 
