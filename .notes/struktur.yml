@@ -5,9 +5,6 @@ models:
       primary: true
     name:
       type: string
-    username:
-      type: string
-      unique: true
     email:
       type: string
       unique: true
