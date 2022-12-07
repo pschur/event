@@ -28,9 +28,8 @@ models:
       type: json
       nullable: true
     organist:
-      type: json
-      structure:
-        name, image, second_text
+      type: relation
+      relation: users.id
   tickets:
     id:
       type: int
