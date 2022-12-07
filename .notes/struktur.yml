@@ -11,10 +11,10 @@ models:
     email:
       type: string
       unique: true
-    password
+    password:
       type: string
       password: true
-      ... 
+    # ...
   events:
     id:
       type: int
@@ -26,18 +26,22 @@ models:
       nullable: true
     free:
       type: bool
-      default: true 
+      default: true
     plans:
       type: json
       nullable: true
-    organisator:
+    organist:
       type: json
       structure:
         name, image, second_text
   tickets:
-    id
-    plan
-    event_id
+    id:
+      type: int
+    plan:
+      type: string
+    event_id:
+      type: relation
+      relation: events.id
     user_id:
       type: relation
-      relation: 
+      relation: users.id
