@@ -27,9 +27,14 @@ models:
     plans:
       type: json
       nullable: true
-    organist:
+    user:
       type: relation
       relation: users.id
+    date:
+      type: json
+    infos:
+      type: json
+      nullable: true
   tickets:
     id:
       type: int
