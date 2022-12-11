@@ -18,8 +18,6 @@ class EventController extends Controller
     {
         $events = Event::where('public', '=', true)->with('organist')->get();
 
-        #dd($events->toArray());
-
         return view('event.index', compact('events'));
     }
 
