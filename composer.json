@@ -49,6 +49,7 @@
             "@php artisan key:generate --ansi"
         ],
         "development": [
+            "Composer\\Config::disableProcessTimeout",
             "@php artisan serve"
         ]
     },
