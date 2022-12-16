@@ -6,9 +6,11 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class EventController extends Controller
 {
+    const ERROR_CODE = 401;
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +30,7 @@ class EventController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('event.create'), self::ERROR_CODE);
         return view('event.create');
     }
 
@@ -39,6 +42,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(Gate::denies('event.create'), self::ERROR_CODE);
         $request->validate([
             'title' => ['required', 'string'],
             'description' => ['nullable', 'string'],
@@ -73,6 +77,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        abort_if(Gate::denies('event.edit', $event), self::ERROR_CODE);
         return view('event.edit', compact('event'));
     }
 
@@ -85,6 +90,7 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        abort_if(Gate::denies('event.edit', $event), self::ERROR_CODE);
         $request->validate([
             'title' => ['required', 'string'],
             'description' => ['nullable', 'string'],
@@ -107,6 +113,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        abort_if(Gate::denies('event.edit', $event), self::ERROR_CODE);
         $event->delete();
 
         return redirect()->route('event.index')->with('success', __(':resource deleted', [
