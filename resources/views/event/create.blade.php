@@ -7,12 +7,55 @@
                     {{ __('Home') }}
                 </x-secondary-button>
             </a>
-            <a href="{{ route('event.create') }}" class="ml-3">
-                <x-button>
-                    <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    {{ __('Create') }}
-                </x-button>
-            </a>
         </x-slot>
     </x-page-heading>
+
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <x-jet-form-section method="POST" :action="route('event.store')">
+            <x-slot name="form">
+                @csrf
+                <div class="col-span-6 sm:col-span-4">
+                    <x-jet-label for="title" value="{{ __('Title') }}" />
+                    <x-jet-input id="title" :value="old('title')" type="text" class="mt-1 block w-full" name="title" />
+                    <x-jet-input-error for="title" class="mt-2" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-4">
+                    <x-jet-label for="description" value="{{ __('Description') }}" />
+                    <x-textarea name="description" />
+                    <x-jet-input-error for="description" class="mt-2" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-4">
+                    <x-jet-label for="date" value="{!! __('Date & Time') !!}" />
+                    <x-jet-input name="date" :value="old('date')" type="datetime-local" class="mt-1 block w-full" />
+                    <x-jet-input-error for="date" class="mt-2" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-4">
+                    <x-jet-label for="place" value="{{ __('Place') }}" />
+                    <x-jet-input name="place-short" :value="old('date')" type="text" class="mt-1 block w-full" placeholder="{{ __('Title of the place') }}"/>
+                    <x-jet-input-error for="place-short" class="mt-2" />
+
+                    <textarea
+                        name="place-long"
+                        id="place-long"
+                        rows="3"
+                        class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
+                        placeholder="{{ __('Address of the place') }}"
+                    ></textarea>
+                    <x-jet-input-error for="place-long" class="mt-2" />
+                </div>
+
+
+            </x-slot>
+
+            <x-slot name="actions">
+                <x-jet-button>
+                    {{ __('Save') }}
+                </x-jet-button>
+            </x-slot>
+        </x-jet-form-section>
+    </div>
+
 </x-app-layout>

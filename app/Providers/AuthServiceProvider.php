@@ -14,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Event' => 'App\Policies\EventPolicy',
     ];
 
     /**
@@ -25,13 +25,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        
-        Gate::define('event.create', function(){
-            return false;
-        };
-
-        Gate::define('event.edit', function(User $user, Event $event){
-            return $user->id == $event->user_id;
-        });
     }
 }

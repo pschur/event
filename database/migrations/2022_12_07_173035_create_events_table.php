@@ -21,7 +21,8 @@ return new class extends Migration
             $table->boolean('free')->default(true);
             $table->json('plans')->nullable();
             $table->boolean('public')->default(false);
-            $table->json('date');
+            $table->date('date');
+            $table->time('time');
             $table->json('infos')->nullable();
             $table->timestamps();
         });
